@@ -8,7 +8,7 @@
     "build": "tsc && tsc-alias && npm run copy-images",
     "copy-images": "copyfiles -u 1 src/mail/images/**/* dist/mail",
      "vercel-build": "npm install --legacy-peer-deps && npm run build",
-      "postinstall": "chmod +x node_modules/.bin/tsc"
+ "postinstall": "chmod +x node_modules/.bin/tsc && chmod +x node_modules/.bin/tsc-alias"      
   },
   "keywords": [],
   "author": "ETA CYRIL",
