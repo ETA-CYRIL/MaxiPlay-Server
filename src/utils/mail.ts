@@ -15,6 +15,10 @@ import {
 } from "#/utils/variables";
 import EmailVerificationToken from "#/models/emailVerificationToken";
 
+//
+import { MailtrapClient } from "mailtrap";
+//
+
 const generateMailTransporter = () => {
   // Looking to send emails in production? Check out our Email API/SMTP product!
   const transport = nodemailer.createTransport({
@@ -144,3 +148,32 @@ export const sendPassResetSeccuessEmail = async (
     ],
   });
 };
+
+// __________________________ new mailling setting
+
+const TOKEN = "542ab2c2dae9551cca83129623fad0d4";
+const ENDPOINT = "send.api.mailtrap.io";
+
+const client = new MailtrapClient({
+  token: TOKEN,
+});
+
+const sender = {
+  email: "hello@www.ileit-seeds.com",
+  name: "Mailtrap Test",
+};
+const recipients = [
+  {
+    email: "eta4272@gmail.com",
+  },
+];
+
+client
+  // .send({
+  //   from: sender,
+  //   to: recipients,
+  //   subject: "You are awesome!",
+  //   text: "Congrats for sending test email with Mailtrap!",
+  //   category: "Integration Test",
+  // })
+  // .then(console.log, console.error);
