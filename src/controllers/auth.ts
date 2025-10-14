@@ -25,26 +25,24 @@ import { mustAuth } from "#/middleware/auth";
 export const create: RequestHandler = async (req: CreateUser, res) => {
   const { email, password, name } = req.body;
 
-  //CreateUserSchema.validate({ email, password, name }).catch((error) => {});
-  // const newUser = new User({ email, password, name });
-  // newUser.save()
+  // 1️ Check if user already exists first
+  const oldUser = await User.findOne({ email });
+  if (oldUser) return res.status(403).json({ error: "User Already Exist" });
 
+  // 2️ Create the new user
   const user = await User.create({ name, email, password });
 
-  const oldUser =   await User.findOne({email})
-
-  if(oldUser) return res.status(403).json({error: "User Already Exist"})
-
-  //send verification Email
+  // 3️ Generate and store verification token
   const token = generateToken();
-
   await EmailVerificationToken.create({
     owner: user._id,
     token,
   });
 
-  sendVerificationMail(token, { name, email, userId: user._id.toString() });
+  // 4️ Send verification email
+  await sendVerificationMail(token, { name, email, userId: user._id.toString() });
 
+  // 5️ Respond to client
   res.status(201).json({ user: { id: user._id, name, email } });
 };
 
@@ -95,7 +93,7 @@ export const sendReVerificationToken: RequestHandler = async (req, res) => {
     owner: userId,
     token,
   });
-
+  // console.log("hi");
   sendVerificationMail(token, {
     name: user?.name,
     email: user?.email,
