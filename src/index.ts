@@ -12,6 +12,7 @@ import profileRouter from "./routers/profile";
 import historyRouter from "./routers/history";
 import "./utils/schedules";
 import { errorHandler } from "./middleware/error";
+import serverless from "serverless-http";
 
 const app = express();
 
@@ -29,9 +30,4 @@ app.use("/history", historyRouter);
 
 app.use(errorHandler)
 
-
-const PORT = process.env.PORT || 8989;
-
-app.listen(PORT, () => {
-  console.log("Port is listening on port " + PORT);
-});
+export default serverless(app);
