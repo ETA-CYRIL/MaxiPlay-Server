@@ -25,16 +25,16 @@ const variables_1 = require("../utils/variables");
 const cloud_1 = __importDefault(require("../cloud"));
 const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password, name } = req.body;
-    const user = yield user_1.default.create({ name, email, password });
     const oldUser = yield user_1.default.findOne({ email });
     if (oldUser)
         return res.status(403).json({ error: "User Already Exist" });
+    const user = yield user_1.default.create({ name, email, password });
     const token = (0, helper_1.generateToken)();
     yield emailVerificationToken_1.default.create({
         owner: user._id,
         token,
     });
-    (0, mail_1.sendVerificationMail)(token, { name, email, userId: user._id.toString() });
+    yield (0, mail_1.sendVerificationMail)(token, { name, email, userId: user._id.toString() });
     res.status(201).json({ user: { id: user._id, name, email } });
 });
 exports.create = create;
