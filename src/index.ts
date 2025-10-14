@@ -1,6 +1,6 @@
 import express from "express";
 import "dotenv/config";
-import 'express-async-error'
+import "express-async-error";
 
 import "./db";
 
@@ -27,8 +27,7 @@ app.use("/playlist", playListRouter);
 app.use("/profile", profileRouter);
 app.use("/history", historyRouter);
 
-app.use(errorHandler)
-
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 8989;
 
