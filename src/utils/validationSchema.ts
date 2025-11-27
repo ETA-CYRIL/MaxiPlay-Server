@@ -23,10 +23,10 @@ export const CreateUserSchema = yup.object().shape({
     .trim()
     .required("password is Required")
     .min(8, "Password is too short")
-    .matches(
-      /^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{8,}$/,
-      "Password is too simple"
-    ),
+    // .matches(
+    //   /^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{8,}$/,
+    //   "Password is too simple"
+    // ),
 });
 
 export const TokenAndIDValidation = yup.object().shape({

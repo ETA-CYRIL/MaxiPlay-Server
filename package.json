@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "tsnd --respawn -r tsconfig-paths/register --pretty --transpile-only ./src/index.ts",
     "build": "tsc && tsc-alias && npm run copy-images",
-  "copy-images": "copyfiles -u 1 src/mail/images/**/* dist/mail",
-  "postinstall": "chmod +x node_modules/.bin/tsc && chmod +x node_modules/.bin/tsc-alias && chmod +x node_modules/.bin/copyfiles",
-  "vercel-build": "npm install --legacy-peer-deps && npm run build"    
+    "copy-images": "copyfiles -u 1 src/mail/images/**/* dist/mail",
+    "postinstall": "chmod +x node_modules/.bin/tsc && chmod +x node_modules/.bin/tsc-alias && chmod +x node_modules/.bin/copyfiles",
+    "vercel-build": "npm install --legacy-peer-deps && npm run build"
   },
   "keywords": [],
   "author": "ETA CYRIL",
@@ -17,6 +17,7 @@
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cloudinary": "^2.7.0",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "express-async-error": "^0.0.2",
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
+    "@types/cors": "^2.8.19",
     "@types/dotenv": "^6.1.1",
     "@types/express": "^5.0.3",
     "@types/formidable": "^3.4.5",

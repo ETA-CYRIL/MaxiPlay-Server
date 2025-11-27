@@ -1,6 +1,7 @@
 import express from "express";
 import "dotenv/config";
 import "express-async-error";
+import cors from "cors";
 
 import "./db";
 
@@ -14,6 +15,9 @@ import "./utils/schedules";
 import { errorHandler } from "./middleware/error";
 
 const app = express();
+
+// Enable CORS for all requests
+// app.use(cors());
 
 // register our middleware
 app.use(express.json());
